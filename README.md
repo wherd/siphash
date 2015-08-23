@@ -2,6 +2,8 @@
 
 Crystal implementation of SipHash-2-4
 
+[![Build Status](https://travis-ci.org/wherd/siphash.svg)](https://travis-ci.org/wherd/siphash)
+
 ## Projectile
 
 ```crystal
