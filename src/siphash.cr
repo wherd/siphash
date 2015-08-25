@@ -22,7 +22,7 @@ module SipHash
         h.digest str
     end
 
-    class Hash
+    struct Hash
         def initialize(k0 : UInt64, k1 : UInt64)
             @v0 = k0 ^ 0x736f6d6570736575_u64
             @v1 = k1 ^ 0x646f72616e646f6d_u64
@@ -32,10 +32,10 @@ module SipHash
 
         # Returns the 64-bit SipHash-2-4
         def digest(msg : String)
-            digest msg.bytes
+            digest Slice.new(msg.to_unsafe, msg.bytesize)
         end
 
-        def digest(msg : Array(UInt8))
+        def digest(msg : Slice(UInt8) | Array(UInt8))
             len = msg.length
             iter = len / 8
 
