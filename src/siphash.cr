@@ -23,6 +23,11 @@ module SipHash
     end
 
     struct Hash
+        @v0 : UInt64
+        @v1 : UInt64
+        @v2 : UInt64
+        @v3 : UInt64
+
         def initialize(k0 : UInt64, k1 : UInt64)
             @v0 = k0 ^ 0x736f6d6570736575_u64
             @v1 = k1 ^ 0x646f72616e646f6d_u64
@@ -36,7 +41,7 @@ module SipHash
         end
 
         def digest(msg : Slice(UInt8) | Array(UInt8))
-            len = msg.length
+            len = msg.size
             iter = len / 8
 
             iter.times do |i|
